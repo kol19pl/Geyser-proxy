@@ -7,9 +7,19 @@ RUN useradd -d /home/container -s /bin/bash container
 #Set the working directory
 WORKDIR /home/container
 #Download and set permissions
-#RUN wget -O playit https://
+RUN wget -O phantom-linux https://github.com/kol19pl/Geyser-proxy/raw/main/phantom-linux
+RUN chmod u+x phantom-linux
 #Set user
-USER container
+#USER container
 #Create volume, if user didn't set up any
 VOLUME ["/home/container"]
-ENTRYPOINT ["./phantom-linux -server rutki.mine.game:19132", "--stdout-logs"]
+ENV ip "0.0.0.0:19132"
+#ENV bind_ip ""
+ENV bind_port 62669
+EXPOSE 19132
+EXPOSE 62669
+#ENTRYPOINT ["./phantom-linux -server 0.0.0.0:19132", "--stdout-logs"]
+#ENTRYPOINT ["./phantom-linux", "-server", $ip]
+
+ENTRYPOINT ./phantom-linux -bind_port $bind_port -server $ip
+#$bind_ip 

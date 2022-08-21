@@ -1,0 +1,26 @@
+#Syntax version 
+version: "1"
+
+services:
+  Geyser:
+    container_name: "Geyser-proxy"
+    image: kol19pl/Geyser-proxy-docker:latest
+    restart: unless-stopped
+    environment:
+      #This allows us to set the timezone, Europe/London for example
+      #List of TZ timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      TZ: "Europe/Warsaw"
+      IP: "0.0.0.0:19132"
+      
+    volumes:
+      #If you want to specify a volume  /home/container 
+      - example-volume:/home/container  
+    ports:
+       -19132:19132
+       -62669:62669
+#Volumes need to be declared here also
+volumes:
+    #The volume name
+    example-volume:
+        #If you've already created the volume with "docker volume create", you can set this to true
+        external: false  

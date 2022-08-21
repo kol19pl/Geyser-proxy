@@ -2,7 +2,7 @@
 version: "1"
 
 services:
-  playit:
+  Geyser:
     container_name: "Geyser-proxy"
     image: kol19pl/Geyser-proxy-docker:latest
     restart: unless-stopped
@@ -10,8 +10,10 @@ services:
       #This allows us to set the timezone, Europe/London for example
       #List of TZ timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       TZ: "Europe/Warsaw"
+      ports:
+       -19132:19132
     volumes:
-      #If you want to specify a volume for storing playit.toml (config), remember to bind it to /home/container 
+      #If you want to specify a volume  /home/container 
       - example-volume:/home/container  
 
 #Volumes need to be declared here also
